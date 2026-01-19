@@ -201,21 +201,22 @@ clockToggle.onclick=()=>{
 clockPlus.onclick=()=>{state.clock.seconds=Math.max(0,state.clock.seconds-60);renderClock();};
 
 /* Period / End Game */
-advancePeriod.onclick=()=>{
-  if(state.game.period===3){
-    if(state.game.score.home!==state.game.score.away){
-      endGame();
-      return;
-    }
-    state.game.period="OT";
-  } else if(state.game.period==="OT"){
+
+advancePeriod.onclick = () => {
+  if (state.game.period === 1) {
+    state.game.period = 2;
+  } else if (state.game.period === 2) {
+    state.game.period = 3;
+  } else if (state.game.period === 3) {
+    state.game.period = "OT";
+  } else if (state.game.period === "OT") {
     endGame();
     return;
-  } else {
-    state.game.period++;
   }
+
   resetClock();
-  gameStatus.textContent=`${state.game.period} — ${state.game.away} @ ${state.game.home}`;
+  gameStatus.textContent =
+    `${state.game.period} — ${state.game.away} @ ${state.game.home}`;
 };
 
 endGame.onclick=endGame;
